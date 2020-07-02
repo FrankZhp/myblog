@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+ <h1>这是我的测试页,Welcome you</h1>
+<div style="margin-right:100px">
+    <button class="btn btn-primary btn-lg" id="Upload" onclick="upload_layer()">upload</button>
+</div>
+<!--<style type="text/javascript" src='{% static "js/jquery.js" %}'></style>-->
+<style type="text/javascript" src='http://cdn.bootcss.com/jquery/1.12.3/jquery.min.js'></style>
+<!--<style type="text/javascript" src="{% static 'js/layer.js' %}"></style>-->
+<script src="{% static "js/jquery.js" %}"></script>
+<script src="{% static 'js/layer.js' %}"></script>
+<script>
+     n=1
+     function upload_layer(){
+        layer.open({
+             type: 2,
+             title: '编辑主机信息',
+             closeBtn: 1,
+             area: ['700px', '550px'],
+             shadeClose: true, //点击遮罩关闭
+             content: ['/account/my-information',],
+             end:function(){
+             var handle_status = $("#handle_status").val();
+             if ( handle_status == '1' ) {
+                 layer.msg('保存成功！',{
+                 icon: 1,
+                 time: 2000 //2秒关闭（如果不配置，默认是3秒）
+             },function(){
+                history.go(0);
+             });
+             } else if ( handle_status == '2' ) {
+               layer.msg('修改失败！',{
+               icon: 2,
+               time: 2000 //2秒关闭（如果不配置，默认是3秒）
+              },function(){
+                history.go(0);
+               });
+   }
+  }
+ });
+
+
+        //在这里面输入任何合法的js语句
+<!--        layer.open({-->
+<!--          type: 1 //Page层类型-->
+<!--          ,area: ['500px', '300px']-->
+<!--          ,title: '你好，layer。'-->
+<!--          ,shade: 0.6 //遮罩透明度-->
+<!--          ,maxmin: true //允许全屏最小化-->
+<!--          ,anim: 1 //0-6的动画形式，-1不开启-->
+<!--          ,content: '<div style="padding:50px;">这是一个非常普通的页面层，传入了自定义的html</div>'-->
+<!--        });-->
+     }
+</script>
+{% endblock %}
